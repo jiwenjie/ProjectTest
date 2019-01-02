@@ -29,7 +29,7 @@ import com.example.root.projecttest.glidetest.ProgressListener;
  * desc:
  * version:1.0
  */
-public class MainActivity extends AppCompatActivity {
+public class FirstActivity extends AppCompatActivity {
 
     String url = "http://guolin.tech/book.png";
 
