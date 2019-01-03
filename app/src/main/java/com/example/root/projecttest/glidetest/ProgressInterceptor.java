@@ -35,7 +35,8 @@ public class ProgressInterceptor implements Interceptor {
       Response response = chain.proceed(request);
       String url = request.url().toString();
       ResponseBody body = response.body();
-      Response newResponse = response.newBuilder().body(new ProgressResponseBody(url, body)).build();
+      Response newResponse = response.newBuilder()
+              .body(new ProgressResponseBody(url, body)).build();
       return newResponse;
    }
 }

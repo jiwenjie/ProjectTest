@@ -1,9 +1,6 @@
 package com.example.root.projecttest.phote_select;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.util.Log;
@@ -23,7 +20,6 @@ import com.example.root.projecttest.glidetest.ProgressListener;
 import uk.co.senab.photoview.PhotoView;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,44 +32,11 @@ import java.util.List;
 public class PhotoSlideAdapter extends PagerAdapter {
 
     private Activity activity;
+    private List<String> beanList;
 
-    private String url;
-//    private static final int[] sDrawables = {R.drawable.wallpaper, R.drawable.wallpaper, R.drawable.wallpaper,
-//            R.drawable.wallpaper, R.drawable.wallpaper, R.drawable.wallpaper};
-
-    private List<ImageBean> beanList = new ArrayList<>();
-    private TextView textView;
-    @SuppressLint("HandlerLeak")
-    private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case 0x100: {
-                    textView.setText(String.valueOf(msg.arg1));
-                    textView.setVisibility(View.VISIBLE);
-//                    textView.setVisibility(View.GONE);
-                    break;
-                }
-                case 0x1: {
-                    textView.setVisibility(View.VISIBLE);
-                    textView.setText(String.valueOf(msg.arg1));
-                   Log.d("PhotoSlideAdapter", "" + msg.arg1);
-                    break;
-                }
-            }
-        }
-    };
-
-    public PhotoSlideAdapter(Activity activity) {
+    public PhotoSlideAdapter(Activity activity, List<String> beanList) {
         this.activity = activity;
-    }
-
-    public void addData(List<ImageBean> list) {
-        if (list != null) {
-            beanList.addAll(list);
-        }
-        notifyDataSetChanged();
+        this.beanList = beanList;
     }
 
     @NonNull
@@ -82,11 +45,7 @@ public class PhotoSlideAdapter extends PagerAdapter {
 
         View view = LayoutInflater.from(activity).inflate(R.layout.activity_photoview, null);
         PhotoView photoView = view.findViewById(R.id.photo_view);
-        textView = view.findViewById(R.id.progressText);
-//        PhotoView photoView = new PhotoView(container.getContext());
-        ImageBean bean = beanList.get(position);
-        url = bean.getUrl();
-
+        final TextView textView = view.findViewById(R.id.progressText);
         photoView.setOnViewTapListener(new PhotoViewAttacher.OnViewTapListener() {
             @Override
             public void onViewTap(View view, float v, float v1) {
@@ -94,23 +53,24 @@ public class PhotoSlideAdapter extends PagerAdapter {
             }
         });
 
-        ProgressInterceptor.addListener(url, new ProgressListener() {
-            @Override
-            public void onProgress(int progress) {
 
-                Message message = Message.obtain();
-                message.arg1 = progress;
-                if (progress == 100) {
-                    message.what = 0x100;
-                } else {
-                    message.what = 0x1;
-                }
-                handler.sendMessageDelayed(message, 500);
+        final String bean = beanList.get(position);
+
+        ProgressInterceptor.addListener(bean, new ProgressListener() {
+            @Override
+            public void onProgress(final int progress) {
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.d("PhotoSlide", "" + progress);
+                        textView.setText(String.valueOf(progress));
+                    }
+                });
             }
         });
 
         Glide.with(activity)
-                .load(url)
+                .load(bean)
                 .skipMemoryCache(true)
                 .placeholder(R.drawable.placeholder)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
@@ -118,30 +78,30 @@ public class PhotoSlideAdapter extends PagerAdapter {
                     @Override
                     public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
                         super.onResourceReady(resource, animation);
-                        ProgressInterceptor.removeListener(url);
+                        ProgressInterceptor.removeListener(bean);
                     }
                 });
 
         /**
          * this is a bug, said childView already have parent view, should remove it
          */
-        if (photoView.getParent() != null || textView.getParent() != null) {
-            ((ViewGroup) photoView.getParent()).removeView(photoView);
-            ((ViewGroup) textView.getParent()).removeView(textView);
-        }
-        container.addView(textView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        container.addView(photoView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        return photoView;
+//        if (view.getParent() != null) {
+//            ((ViewGroup) view.getParent()).removeView(view);
+//        }
+        container.addView(view);
+//        container.addView(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        return view;
     }
 
     @Override
     public int getCount() {
-        return beanList.size();
+        return beanList == null ? 0 : beanList.size();
     }
 
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, Object object) {
-        container.removeView((View) object);
+        View view = (View) object;
+        container.removeView(view);
     }
 
     @Override

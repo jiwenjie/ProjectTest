@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import com.example.root.projecttest.phote_select.PhotoSelectActivity;
 
 /**
  * author:Jiwenjie
@@ -20,6 +21,7 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         findViewById(R.id.btn1).setOnClickListener(this);
+        findViewById(R.id.btn2).setOnClickListener(this);
     }
 
     @Override
@@ -28,6 +30,9 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.btn1: {
                 startActivity(new Intent(this, FirstActivity.class));
                 break;
+            }
+            case R.id.btn2: {
+                startActivity(new Intent(this, PhotoSelectActivity.class));
             }
         }
     }
