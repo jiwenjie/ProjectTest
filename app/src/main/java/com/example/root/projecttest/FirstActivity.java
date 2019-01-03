@@ -19,19 +19,20 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.bumptech.glide.request.target.Target;
-import com.example.root.projecttest.glidetest.ProgressInterceptor;
-import com.example.root.projecttest.glidetest.ProgressListener;
+import com.example.root.projecttest.glide.ProgressInterceptor;
+import com.example.root.projecttest.glide.ProgressListener;
 
 /**
  * author:Jiwenjie
  * email:278630464@qq.com
  * time:2019/01/02
- * desc:
+ * desc: display only one picture progress
  * version:1.0
  */
 public class FirstActivity extends AppCompatActivity {
 
     String url = "http://guolin.tech/book.png";
+    String gifUrl = "http://guolin.tech/test.gif";
 
     Button button;
     ImageView image;
@@ -78,7 +79,7 @@ public class FirstActivity extends AppCompatActivity {
 
     public void loadImage() {
 
-        ProgressInterceptor.addListener(url, new ProgressListener() {
+        ProgressInterceptor.addListener(gifUrl, new ProgressListener() {
             @Override
             public void onProgress(int progress) {
 
@@ -95,7 +96,7 @@ public class FirstActivity extends AppCompatActivity {
             }
         });
         Glide.with(this)
-                .load(url)
+                .load(gifUrl)
                 .skipMemoryCache(true)
                 .placeholder(R.drawable.placeholder)
                 .dontTransform()
@@ -112,7 +113,7 @@ public class FirstActivity extends AppCompatActivity {
                     public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
                         super.onResourceReady(resource, animation);
 //                    progressDialog.dismiss();
-                        ProgressInterceptor.removeListener(url);
+                        ProgressInterceptor.removeListener(gifUrl);
                     }
                 });
     }

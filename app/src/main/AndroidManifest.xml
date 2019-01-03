@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".phote_select.PhotoSelectActivity">
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,11 +22,11 @@
         </activity>
 
         <meta-data
-            android:name="com.example.root.projecttest.glidetest.MyGlideModule"
+            android:name="com.example.root.projecttest.glide.MyGlideModule"
             android:value="GlideModule" />
 
-        <!--<activity android:name=".FirstActivity" />-->
+        <activity android:name=".FirstActivity" />
 
-        <!--<activity android:name=".phote_select.PhotoSelectActivity" />-->
+        <activity android:name=".phote_select.PhotoSelectActivity" />
     </application>
 </manifest>

@@ -1,4 +1,4 @@
-package com.example.root.projecttest.glidetest;
+package com.example.root.projecttest.glide;
 
 /**
  * author:Jiwenjie

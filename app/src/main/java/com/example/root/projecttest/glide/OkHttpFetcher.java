@@ -1,4 +1,4 @@
-package com.example.root.projecttest.glidetest;
+package com.example.root.projecttest.glide;
 
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.data.DataFetcher;

@@ -1,6 +1,5 @@
-package com.example.root.projecttest.glidetest;
+package com.example.root.projecttest.glide;
 
-import android.util.Log;
 import okhttp3.MediaType;
 import okhttp3.ResponseBody;
 import okio.*;

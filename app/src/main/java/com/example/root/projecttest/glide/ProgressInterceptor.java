@@ -1,4 +1,4 @@
-package com.example.root.projecttest.glidetest;
+package com.example.root.projecttest.glide;
 
 import android.support.annotation.NonNull;
 import okhttp3.Interceptor;
