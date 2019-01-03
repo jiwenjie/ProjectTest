@@ -13,10 +13,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.gif.GifDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.BaseTarget;
-import com.bumptech.glide.request.target.ImageViewTarget;
 import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.target.SizeReadyCallback;
 import com.example.root.projecttest.R;
 import com.example.root.projecttest.glide.ProgressInterceptor;
 import com.example.root.projecttest.glide.ProgressListener;
@@ -82,7 +79,6 @@ public class PhotoSlideAdapter extends PagerAdapter {
                 .placeholder(R.drawable.placeholder)
                 .error(R.drawable.wallpaper)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
-//                .into(photoView);
                 .into(new SimpleTarget<GifDrawable>() {
                     @Override
                     public void onResourceReady(GifDrawable resource, GlideAnimation<? super GifDrawable> glideAnimation) {
@@ -112,11 +108,7 @@ public class PhotoSlideAdapter extends PagerAdapter {
         /**
          * this is a bug, said childView already have parent view, should remove it
          */
-//        if (view.getParent() != null) {
-//            ((ViewGroup) view.getParent()).removeView(view);
-//        }
         container.addView(view);
-//        container.addView(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         return view;
     }
 
