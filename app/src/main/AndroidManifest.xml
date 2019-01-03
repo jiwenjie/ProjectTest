@@ -25,8 +25,8 @@
             android:name="com.example.root.projecttest.glide.MyGlideModule"
             android:value="GlideModule" />
 
-        <activity android:name=".OnePictureProgressActivity" />
+        <activity android:name=".activity.OnePictureProgressActivity" />
 
-        <activity android:name=".phote_select.MultiplePhotoSelectActivity" />
+        <activity android:name=".activity.MultiplePhotoSelectActivity" />
     </application>
 </manifest>

@@ -13,7 +13,10 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.gif.GifDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.BaseTarget;
 import com.bumptech.glide.request.target.ImageViewTarget;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.target.SizeReadyCallback;
 import com.example.root.projecttest.R;
 import com.example.root.projecttest.glide.ProgressInterceptor;
 import com.example.root.projecttest.glide.ProgressListener;
@@ -45,7 +48,7 @@ public class PhotoSlideAdapter extends PagerAdapter {
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
 
         View view = LayoutInflater.from(activity).inflate(R.layout.activity_photoview, null);
-        PhotoView photoView = view.findViewById(R.id.photo_view);
+        final PhotoView photoView = view.findViewById(R.id.photo_view);
         final TextView textView = view.findViewById(R.id.progressText);
 
         /** this listener representation click page and finish activity **/
@@ -80,15 +83,14 @@ public class PhotoSlideAdapter extends PagerAdapter {
                 .error(R.drawable.wallpaper)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
 //                .into(photoView);
-                .into(new ImageViewTarget<GifDrawable>(photoView) {
-                    @Override
-                    protected void setResource(GifDrawable resource) {
-                        resource.start();
-                    }
-
+                .into(new SimpleTarget<GifDrawable>() {
                     @Override
                     public void onResourceReady(GifDrawable resource, GlideAnimation<? super GifDrawable> glideAnimation) {
-                        super.onResourceReady(resource, glideAnimation);
+                        if (resource.isAnimated()) {
+                            resource.setLoopCount(GifDrawable.LOOP_FOREVER);
+                            resource.start();
+                        }
+                        photoView.setImageDrawable(resource);
                         ProgressInterceptor.removeListener(url);
                     }
                 });

@@ -5,7 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import com.example.root.projecttest.phote_select.MultiplePhotoSelectActivity;
+import com.example.root.projecttest.activity.MultiplePhotoSelectActivity;
+import com.example.root.projecttest.activity.OnePictureProgressActivity;
 
 /**
  * author:Jiwenjie

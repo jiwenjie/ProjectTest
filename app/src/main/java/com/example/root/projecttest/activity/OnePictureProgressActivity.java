@@ -1,4 +1,4 @@
-package com.example.root.projecttest;
+package com.example.root.projecttest.activity;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -19,6 +19,7 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.bumptech.glide.request.target.Target;
+import com.example.root.projecttest.R;
 import com.example.root.projecttest.glide.ProgressInterceptor;
 import com.example.root.projecttest.glide.ProgressListener;
 

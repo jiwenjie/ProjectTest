@@ -1,4 +1,4 @@
-package com.example.root.projecttest.phote_select;
+package com.example.root.projecttest.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -6,6 +6,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.root.projecttest.R;
+import com.example.root.projecttest.phote_select.ImageBean;
+import com.example.root.projecttest.phote_select.PhotoSlideAdapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,10 +37,10 @@ public class MultiplePhotoSelectActivity extends AppCompatActivity {
 
        /** multiply gif **/
        viewPager.setAdapter(new PhotoSlideAdapter(this, Arrays.asList(
-               "http://guolin.tech/test.gif",
-               "http://guolin.tech/test.gif",
-               "http://guolin.tech/test.gif",
-               "http://guolin.tech/test.gif",
+               "http://img.soogif.com/YVv7VNrzYSxwPSZOr9uIrs2c0F8tASgU.gif_s400x0",
+               "http://img.soogif.com/kjjnS1BvBZEdps1XrVTC0JlrkgVbqhiQ.gif_s400x0",
+               "http://img.soogif.com/mn4Y8K0SLfCkE7tbOQU1SAFxP2zNeK6J.gif_s300x0",
+               "http://img.soogif.com/jU6YkPAJ6rhYxWm0LOBgn2zELCG9xqp7.gif_s300x0",
                "http://guolin.tech/test.gif")));
    }
 
