@@ -18,7 +18,7 @@ import java.util.Arrays;
  *  2: if multiple URLs are the same, the first picture progress is wrong
  * version:1.0
  */
-public class PhotoSelectActivity extends AppCompatActivity {
+public class MultiplePhotoSelectActivity extends AppCompatActivity {
 
     private ArrayList<ImageBean> beanList = new ArrayList<>();
 

@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import com.example.root.projecttest.phote_select.PhotoSelectActivity;
+import com.example.root.projecttest.phote_select.MultiplePhotoSelectActivity;
 
 /**
  * author:Jiwenjie
@@ -28,11 +28,11 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn1: {
-                startActivity(new Intent(this, FirstActivity.class));
+                startActivity(new Intent(this, OnePictureProgressActivity.class));
                 break;
             }
             case R.id.btn2: {
-                startActivity(new Intent(this, PhotoSelectActivity.class));
+                startActivity(new Intent(this, MultiplePhotoSelectActivity.class));
             }
         }
     }

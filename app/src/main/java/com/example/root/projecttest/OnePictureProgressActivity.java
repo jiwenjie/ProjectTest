@@ -29,7 +29,7 @@ import com.example.root.projecttest.glide.ProgressListener;
  * desc: display only one picture progress
  * version:1.0
  */
-public class FirstActivity extends AppCompatActivity {
+public class OnePictureProgressActivity extends AppCompatActivity {
 
     String url = "http://guolin.tech/book.png";
     String gifUrl = "http://guolin.tech/test.gif";

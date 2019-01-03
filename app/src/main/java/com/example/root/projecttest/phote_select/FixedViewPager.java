@@ -5,6 +5,9 @@ import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
+/**
+ * it use multiple pictures base (in XML)
+ */
 public class FixedViewPager extends ViewPager {
 
     public FixedViewPager(Context context) {
