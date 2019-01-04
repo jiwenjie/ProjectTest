@@ -12,18 +12,18 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.load.resource.gif.GifDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.example.root.projecttest.R;
 import com.example.root.projecttest.glide.ProgressInterceptor;
 import com.example.root.projecttest.glide.ProgressListener;
 import com.example.root.projecttest.widget.CircleView;
 
+import java.util.List;
+
 import uk.co.senab.photoview.PhotoView;
 import uk.co.senab.photoview.PhotoViewAttacher;
-
-import java.util.List;
 
 /**
  * author:Jiwenjie
@@ -33,12 +33,12 @@ import java.util.List;
  *      left or right slider until view progress)
  * version:1.0
  */
-public class PhotoSlideAdapter extends PagerAdapter {
+public class GifSlideAdapter extends PagerAdapter {
 
     private Activity activity;
     private List<String> beanList;
 
-    public PhotoSlideAdapter(Activity activity, List<String> beanList) {
+    public GifSlideAdapter(Activity activity, List<String> beanList) {
         this.activity = activity;
         this.beanList = beanList;
     }
@@ -49,8 +49,8 @@ public class PhotoSlideAdapter extends PagerAdapter {
 
         View view = LayoutInflater.from(activity).inflate(R.layout.activity_photoview_test, null);
         final PhotoView photoView = view.findViewById(R.id.photo_view);
-        final CircleView circleView = view.findViewById(R.id.circleView);
 
+        final CircleView circleView = view.findViewById(R.id.circleView);
         final TextView textView = view.findViewById(R.id.progressText);
 
         /** this listener representation click page and finish activity **/
@@ -76,34 +76,48 @@ public class PhotoSlideAdapter extends PagerAdapter {
                             ObjectAnimator objectAnimator = ObjectAnimator.ofInt(circleView, "value", progress, progress + 1);
                             objectAnimator.setDuration(200);
                             objectAnimator.start();
-                        } else if (progress == 100){
+                        } else {
                            ObjectAnimator objectAnimator = ObjectAnimator.ofInt(circleView, "value", progress);
-                           objectAnimator.setDuration(1);
+                           objectAnimator.setDuration(200);
                            objectAnimator.start();
                         }
-                        textView.setText(String.valueOf(progress + "%=="));
+                        textView.setText(String.valueOf(progress + "%"));
+//                        textView.setText(String.valueOf(progress + "%"));
+
+                        if (progress == 100) {
+                            circleView.setVisibility(View.GONE);
+                            textView.setVisibility(View.GONE);
+                        } else {
+                            circleView.setVisibility(View.VISIBLE);
+                            textView.setVisibility(View.VISIBLE);
+                        }
                     }
                 });
             }
         });
 
-        /** 此处是正常的图片操作，不包括 gif **/
+        /** 这里是 gif 图的操作 **/
         Glide.with(activity)
                 .load(url)
+                .asGif()
 //                .skipMemoryCache(true)
 //                .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .placeholder(R.drawable.placeholder)
-                .into(new GlideDrawableImageViewTarget(photoView) {
+                .error(R.drawable.wallpaper)
+                .into(new SimpleTarget<GifDrawable>() {
                     @Override
-                    public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
-                        super.onResourceReady(resource, animation); // load or process(处理) complete call change method
-//                        textView.setVisibility(View.GONE);
-//                        circleView.setVisibility(View.GONE);
+                    public void onResourceReady(GifDrawable resource, GlideAnimation<? super GifDrawable> glideAnimation) {
+                        if (resource.isAnimated()) {        // load or process(处理) complete call change method
+                            resource.setLoopCount(GifDrawable.LOOP_FOREVER);
+                            resource.start();
+                        }
+                        photoView.setImageDrawable(resource);
                         ProgressInterceptor.removeListener(url);
                         textView.setVisibility(View.GONE);
                         circleView.setVisibility(View.GONE);
                     }
                 });
+
         /**
          * this is a bug, said childView already have parent view, should remove it
          */
@@ -127,5 +141,20 @@ public class PhotoSlideAdapter extends PagerAdapter {
         return view == object;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

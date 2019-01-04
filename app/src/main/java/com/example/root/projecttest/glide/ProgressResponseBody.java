@@ -62,6 +62,11 @@ public class ProgressResponseBody extends ResponseBody {
             totalBytesRead += bytesRead;
          }
          int progress = (int) (100f * totalBytesRead / fullLength);
+         try {
+            Thread.sleep(90);
+         } catch (Exception e) {
+
+         }
 //         Log.d(TAG, "download progress is " + progress);
          if (listener != null && progress != currentProgress) {
             listener.onProgress(progress);

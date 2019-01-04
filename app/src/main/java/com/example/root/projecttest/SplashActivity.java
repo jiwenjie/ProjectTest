@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+
+import com.example.root.projecttest.activity.MultipleGifSelectActivity;
 import com.example.root.projecttest.activity.MultiplePhotoSelectActivity;
 import com.example.root.projecttest.activity.OnePictureProgressActivity;
 
@@ -23,6 +25,7 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_splash);
         findViewById(R.id.btn1).setOnClickListener(this);
         findViewById(R.id.btn2).setOnClickListener(this);
+        findViewById(R.id.btn3).setOnClickListener(this);
     }
 
     @Override
@@ -34,6 +37,9 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
             }
             case R.id.btn2: {
                 startActivity(new Intent(this, MultiplePhotoSelectActivity.class));
+            }
+            case R.id.btn3: {
+                startActivity(new Intent(this, MultipleGifSelectActivity.class));
             }
         }
     }

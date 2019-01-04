@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
     <com.example.root.projecttest.phote_select.FixedViewPager
-        android:id="@+id/photo_viewpager"
+        android:id="@+id/gif_viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
