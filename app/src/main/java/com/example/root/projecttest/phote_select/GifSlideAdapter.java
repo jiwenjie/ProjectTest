@@ -2,7 +2,9 @@ package com.example.root.projecttest.phote_select;
 
 import android.animation.ObjectAnimator;
 import android.app.Activity;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,7 +32,7 @@ import uk.co.senab.photoview.PhotoViewAttacher;
  * email:278630464@qq.com
  * time:2019/01/02
  * desc: photoSelect (when there are many pictures,
- *      left or right slider until view progress)
+ * left or right slider until view progress)
  * version:1.0
  */
 public class GifSlideAdapter extends PagerAdapter {
@@ -47,7 +49,7 @@ public class GifSlideAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
 
-        View view = LayoutInflater.from(activity).inflate(R.layout.activity_photoview_test, null);
+        View view = LayoutInflater.from(activity).inflate(R.layout.activity_photoview_gif, null);
         final PhotoView photoView = view.findViewById(R.id.photo_view);
 
         final CircleView circleView = view.findViewById(R.id.circleView);
@@ -63,6 +65,13 @@ public class GifSlideAdapter extends PagerAdapter {
 
         final String url = beanList.get(position);
 
+        /** initialization **/
+        circleView.setValue(0, ContextCompat.getColor(activity, R.color.white),
+                Color.parseColor("#88FFFFFF"));
+        textView.setText("0%");
+        circleView.setVisibility(View.VISIBLE);
+        textView.setVisibility(View.VISIBLE);
+
         ProgressInterceptor.addListener(url, new ProgressListener() {
             @Override
             public void onProgress(final int progress) {
@@ -70,19 +79,10 @@ public class GifSlideAdapter extends PagerAdapter {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Log.d("PhotoSlide", "" + progress);
+                        Log.d("GifSlide", "" + progress);
 
-                        if (progress < 100) {
-                            ObjectAnimator objectAnimator = ObjectAnimator.ofInt(circleView, "value", progress, progress + 1);
-                            objectAnimator.setDuration(200);
-                            objectAnimator.start();
-                        } else {
-                           ObjectAnimator objectAnimator = ObjectAnimator.ofInt(circleView, "value", progress);
-                           objectAnimator.setDuration(200);
-                           objectAnimator.start();
-                        }
+                        circleView.setValue(progress, 300);
                         textView.setText(String.valueOf(progress + "%"));
-//                        textView.setText(String.valueOf(progress + "%"));
 
                         if (progress == 100) {
                             circleView.setVisibility(View.GONE);
@@ -100,27 +100,25 @@ public class GifSlideAdapter extends PagerAdapter {
         Glide.with(activity)
                 .load(url)
                 .asGif()
-//                .skipMemoryCache(true)
-//                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                // 下面两行在实际使用中需要去掉
+                .skipMemoryCache(true)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .placeholder(R.drawable.placeholder)
                 .error(R.drawable.wallpaper)
                 .into(new SimpleTarget<GifDrawable>() {
                     @Override
                     public void onResourceReady(GifDrawable resource, GlideAnimation<? super GifDrawable> glideAnimation) {
+                        textView.setVisibility(View.GONE);
+                        circleView.setVisibility(View.GONE);
                         if (resource.isAnimated()) {        // load or process(处理) complete call change method
                             resource.setLoopCount(GifDrawable.LOOP_FOREVER);
                             resource.start();
                         }
                         photoView.setImageDrawable(resource);
                         ProgressInterceptor.removeListener(url);
-                        textView.setVisibility(View.GONE);
-                        circleView.setVisibility(View.GONE);
                     }
                 });
 
-        /**
-         * this is a bug, said childView already have parent view, should remove it
-         */
         container.addView(view);
         return view;
     }

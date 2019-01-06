@@ -37,9 +37,11 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
             }
             case R.id.btn2: {
                 startActivity(new Intent(this, MultiplePhotoSelectActivity.class));
+                break;
             }
             case R.id.btn3: {
                 startActivity(new Intent(this, MultipleGifSelectActivity.class));
+                break;
             }
         }
     }

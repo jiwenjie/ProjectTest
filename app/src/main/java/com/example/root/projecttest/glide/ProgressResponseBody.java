@@ -1,5 +1,7 @@
 package com.example.root.projecttest.glide;
 
+import android.util.Log;
+
 import okhttp3.MediaType;
 import okhttp3.ResponseBody;
 import okio.*;
@@ -62,12 +64,14 @@ public class ProgressResponseBody extends ResponseBody {
             totalBytesRead += bytesRead;
          }
          int progress = (int) (100f * totalBytesRead / fullLength);
+
+         /** increase the delay in order to see the change in the value **/
          try {
             Thread.sleep(90);
          } catch (Exception e) {
 
          }
-//         Log.d(TAG, "download progress is " + progress);
+         Log.d(TAG, "download progress is " + progress);
          if (listener != null && progress != currentProgress) {
             listener.onProgress(progress);
          }

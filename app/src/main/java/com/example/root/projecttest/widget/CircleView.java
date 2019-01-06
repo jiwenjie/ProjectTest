@@ -1,5 +1,6 @@
 package com.example.root.projecttest.widget;
 
+import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -57,18 +58,26 @@ public class CircleView extends View {
    }
 
    public void setValue(int value) {
+      setValue(value, 0);
+   }
+
+   public void setValue(int value, long duration) {
+      ValueAnimator valueAnimator = ValueAnimator.ofInt(this.value, value);
+      valueAnimator.setDuration(duration);
+      valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+         @Override
+         public void onAnimationUpdate(ValueAnimator animation) {
+            CircleView.this.value = (int) animation.getAnimatedValue();
+            invalidate();
+         }
+      });
+      valueAnimator.start();
+   }
+
+   public void setValue(int value, @ColorInt int valueColor, @ColorInt int totalColor) {
       this.value = value;
-//      postInvalidate();
-      invalidate();
-   }
-
-   public void setTotalColor(@ColorInt int totalColor) {
-      this.totalColor = totalColor;
-      invalidate();
-   }
-
-   public void setValueColor(@ColorInt int valueColor) {
       this.valueColor = valueColor;
+      this.totalColor = totalColor;
       invalidate();
    }
 
