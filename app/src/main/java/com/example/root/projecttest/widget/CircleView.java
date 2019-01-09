@@ -74,6 +74,22 @@ public class CircleView extends View {
       valueAnimator.start();
    }
 
+   public void setValue(int value, long duration, ValueAnimator.AnimatorUpdateListener listener) {
+      ValueAnimator valueAnimator = ValueAnimator.ofInt(this.value, value);
+      valueAnimator.setDuration(duration);
+      valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+         @Override
+         public void onAnimationUpdate(ValueAnimator animation) {
+            CircleView.this.value = (int) animation.getAnimatedValue();
+            invalidate();
+         }
+      });
+      if (listener != null) {
+         valueAnimator.addUpdateListener(listener);
+      }
+      valueAnimator.start();
+   }
+
    public void setValue(int value, @ColorInt int valueColor, @ColorInt int totalColor) {
       this.value = value;
       this.valueColor = valueColor;

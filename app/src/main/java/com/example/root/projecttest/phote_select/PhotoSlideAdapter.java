@@ -1,8 +1,10 @@
 package com.example.root.projecttest.phote_select;
 
 import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
@@ -80,8 +82,12 @@ public class PhotoSlideAdapter extends PagerAdapter {
                     public void run() {
                         Log.d("PhotoSlide", "" + progress);
 
-                        circleView.setValue(progress, 300);
-                        textView.setText(String.valueOf(progress + "%"));
+                        circleView.setValue(progress, 300, new ValueAnimator.AnimatorUpdateListener() {
+                            @Override
+                            public void onAnimationUpdate(ValueAnimator animation) {
+                                textView.setText(String.valueOf(animation.getAnimatedValue() + "%"));
+                            }
+                        });
 
                         if (progress == 100) {
                             circleView.setVisibility(View.GONE);
@@ -109,6 +115,13 @@ public class PhotoSlideAdapter extends PagerAdapter {
                         circleView.setVisibility(View.GONE);
                         super.onResourceReady(resource, animation); // load or process(处理) complete call change method
                         ProgressInterceptor.removeListener(url);
+                    }
+
+                    @Override
+                    public void onLoadFailed(Exception e, Drawable errorDrawable) {
+                        super.onLoadFailed(e, errorDrawable);
+                        textView.setVisibility(View.GONE);
+                        circleView.setVisibility(View.GONE);
                     }
                 });
         container.addView(view);
