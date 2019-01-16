@@ -31,5 +31,9 @@
 
         <activity android:name=".activity.MultipleGifSelectActivity" />
 
+        <activity
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:name=".activity.TabLayoutMoveStopActivity" />
+
     </application>
 </manifest>
