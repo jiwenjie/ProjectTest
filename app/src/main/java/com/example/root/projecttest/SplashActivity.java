@@ -6,9 +6,12 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.example.root.projecttest.activity.CoordinatorLayoutActivity;
+import com.example.root.projecttest.activity.ExplorationAcoutCoordinatorLayoutActivity;
 import com.example.root.projecttest.activity.MultipleGifSelectActivity;
 import com.example.root.projecttest.activity.MultiplePhotoSelectActivity;
 import com.example.root.projecttest.activity.OnePictureProgressActivity;
+import com.example.root.projecttest.activity.PopupWindowAnimationActivity;
 import com.example.root.projecttest.activity.TabLayoutMoveStopActivity;
 
 /**
@@ -28,6 +31,9 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.btn2).setOnClickListener(this);
         findViewById(R.id.btn3).setOnClickListener(this);
         findViewById(R.id.btn4).setOnClickListener(this);
+        findViewById(R.id.btn5).setOnClickListener(this);
+        findViewById(R.id.btn6).setOnClickListener(this);
+        findViewById(R.id.btn7).setOnClickListener(this);
     }
 
     @Override
@@ -48,6 +54,17 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.btn4: {
                 startActivity(new Intent(this, TabLayoutMoveStopActivity.class));
                 break;
+            }
+            case R.id.btn5: {
+                startActivity(new Intent(this, CoordinatorLayoutActivity.class));
+                break;
+            }
+            case R.id.btn6: {
+                startActivity(new Intent(this, ExplorationAcoutCoordinatorLayoutActivity.class));
+                break;
+            }
+            case R.id.btn7: {
+                startActivity(new Intent(this, PopupWindowAnimationActivity.class));
             }
         }
     }
