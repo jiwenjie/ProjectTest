@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.example.root.projecttest.activity.CoordinatorLayoutActivity;
+import com.example.root.projecttest.activity.DialogRvActivity;
 import com.example.root.projecttest.activity.ExplorationAcoutCoordinatorLayoutActivity;
 import com.example.root.projecttest.activity.MultipleGifSelectActivity;
 import com.example.root.projecttest.activity.MultiplePhotoSelectActivity;
@@ -34,6 +35,7 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.btn5).setOnClickListener(this);
         findViewById(R.id.btn6).setOnClickListener(this);
         findViewById(R.id.btn7).setOnClickListener(this);
+        findViewById(R.id.btn8).setOnClickListener(this);
     }
 
     @Override
@@ -65,6 +67,11 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
             }
             case R.id.btn7: {
                 startActivity(new Intent(this, PopupWindowAnimationActivity.class));
+                break;
+            }
+            case R.id.btn8: {
+                startActivity(new Intent(this, DialogRvActivity.class));
+                break;
             }
         }
     }

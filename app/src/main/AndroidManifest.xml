@@ -41,5 +41,7 @@
 
         <activity android:name=".activity.PopupWindowAnimationActivity" />
 
+        <activity android:name=".activity.DialogRvActivity" />
+
     </application>
 </manifest>

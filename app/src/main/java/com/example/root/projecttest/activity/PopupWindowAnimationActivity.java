@@ -27,7 +27,7 @@ public class PopupWindowAnimationActivity extends AppCompatActivity {
    @Override
    protected void onCreate(@Nullable Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
-      setContentView(R.layout.activity_popupwindow_animation);
+      setContentView(R.layout.activity_bottom_view);
       btnPop = findViewById(R.id.btn_popup);
 
       btnPop.setOnClickListener(new View.OnClickListener() {
