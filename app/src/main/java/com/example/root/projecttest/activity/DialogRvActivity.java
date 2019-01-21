@@ -17,9 +17,11 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.root.projecttest.R;
 import com.example.root.projecttest.other.PopBean;
+import com.example.root.projecttest.widget.ListBottomDialog;
 
 import java.util.Arrays;
 import java.util.List;
@@ -46,84 +48,14 @@ public class DialogRvActivity extends AppCompatActivity {
       });
    }
 
-   private void showDialog(
-                           String title,
-                           List<PopBean> beanList) {
-      final Dialog dialog = new Dialog(this, R.style.BottomDialog);
-
-      View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.dialog_rv_layout, null);
-      dialog.setContentView(view);
-
-      view.findViewById(R.id.view_bottom_pop_cancelText).setOnClickListener(new View.OnClickListener() {
+   private void showDialog(String title, List<PopBean> beanList) {
+      final ListBottomDialog dialog = new ListBottomDialog(this, title, beanList,
+              new ListBottomDialog.ItemClickListener() {
          @Override
-         public void onClick(View v) {
-            dialog.dismiss();
+         public void onItemClick(int index, PopBean popBean) {
+            Toast.makeText(getApplicationContext(), "获取的" + popBean.getName(), Toast.LENGTH_SHORT).show();
          }
       });
-
-      ListView listView = view.findViewById(R.id.view_bottom_pop_listView);
-
-      if (!TextUtils.isEmpty(title)) {
-         View header = getLayoutInflater().inflate(R.layout.view_bottom_pop_header, null);
-         TextView titleText = header.findViewById(R.id.view_bottom_pop_header_titleTex);
-         titleText.setText(title);
-         listView.addHeaderView(header);
-      }
-
-      listView.setAdapter(new MyAdapter(beanList, true));
-      listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-         @Override
-         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-         }
-      });
-
-      Window dialogWindow = dialog.getWindow();
-      //设置dialog的显示位置
-      dialogWindow.setGravity(Gravity.BOTTOM);
-      WindowManager.LayoutParams lp = dialogWindow.getAttributes(); // 获取对话框当前的参数值
-      lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-      lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-
-      lp.alpha = 9f; // 透明度
-      dialogWindow.setAttributes(lp);
       dialog.show();
-   }
-
-   private class MyAdapter extends BaseAdapter {
-
-      private List<PopBean> beanList;
-      private boolean singleChoice;
-
-      public MyAdapter(List<PopBean> beanList, boolean singleChoice) {
-         this.beanList = beanList;
-         this.singleChoice = singleChoice;
-      }
-
-      @Override
-      public int getCount() {
-         return beanList == null ? 0 : beanList.size();
-      }
-
-      @Override
-      public Object getItem(int position) {
-         return null;
-      }
-
-      @Override
-      public long getItemId(int position) {
-         return 0;
-      }
-
-      @Override
-      public View getView(int position, View convertView, ViewGroup parent) {
-         @SuppressLint("ViewHolder") View view = View.inflate(parent.getContext(), R.layout.view_bottom_pop_item, null);
-         ImageView imageView = view.findViewById(R.id.view_bottom_pop_item_imageView);
-         TextView textView = view.findViewById(R.id.view_bottom_pop_item_textView);
-         imageView.setVisibility(singleChoice ? View.GONE : View.VISIBLE);
-         imageView.setImageResource(beanList.get(position).isCheck() ? R.drawable.ic_launcher_background : R.drawable.ic_launcher_foreground);
-         textView.setText(beanList.get(position).getName());
-         return view;
-      }
    }
 }
