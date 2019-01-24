@@ -30,6 +30,7 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.btn7).setOnClickListener(this);
         findViewById(R.id.btn8).setOnClickListener(this);
         findViewById(R.id.btn9).setOnClickListener(this);
+        findViewById(R.id.btn10).setOnClickListener(this);
     }
 
     @Override
@@ -70,6 +71,9 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.btn9: {
                 startActivity(new Intent(this, DoubleClickActivity.class));
                 break;
+            }
+            case R.id.btn10: {
+                startActivity(new Intent(this, CameraActivity.class));
             }
         }
     }

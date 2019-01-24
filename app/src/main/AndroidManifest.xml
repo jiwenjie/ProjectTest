@@ -46,5 +46,18 @@
         <!-- 双击头像的效果 -->
         <activity android:name=".activity.DoubleClickActivity" />
 
+        <activity android:name=".activity.CameraActivity" />
+
+
+        <provider
+            android:authorities="com.jackson.fileprovider"
+            android:name="android.support.v4.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_path" />
+        </provider>
+
     </application>
 </manifest>
