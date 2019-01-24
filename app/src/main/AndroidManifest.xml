@@ -43,5 +43,8 @@
 
         <activity android:name=".activity.DialogRvActivity" />
 
+        <!-- 双击头像的效果 -->
+        <activity android:name=".activity.DoubleClickActivity" />
+
     </application>
 </manifest>

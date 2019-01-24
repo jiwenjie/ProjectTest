@@ -6,14 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.example.root.projecttest.activity.CoordinatorLayoutActivity;
-import com.example.root.projecttest.activity.DialogRvActivity;
-import com.example.root.projecttest.activity.ExplorationAcoutCoordinatorLayoutActivity;
-import com.example.root.projecttest.activity.MultipleGifSelectActivity;
-import com.example.root.projecttest.activity.MultiplePhotoSelectActivity;
-import com.example.root.projecttest.activity.OnePictureProgressActivity;
-import com.example.root.projecttest.activity.PopupWindowAnimationActivity;
-import com.example.root.projecttest.activity.TabLayoutMoveStopActivity;
+import com.example.root.projecttest.activity.*;
 
 /**
  * author:Jiwenjie
@@ -36,6 +29,7 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.btn6).setOnClickListener(this);
         findViewById(R.id.btn7).setOnClickListener(this);
         findViewById(R.id.btn8).setOnClickListener(this);
+        findViewById(R.id.btn9).setOnClickListener(this);
     }
 
     @Override
@@ -71,6 +65,10 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
             }
             case R.id.btn8: {
                 startActivity(new Intent(this, DialogRvActivity.class));
+                break;
+            }
+            case R.id.btn9: {
+                startActivity(new Intent(this, DoubleClickActivity.class));
                 break;
             }
         }
