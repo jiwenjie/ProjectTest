@@ -48,7 +48,6 @@
 
         <activity android:name=".activity.CameraActivity" />
 
-
         <provider
             android:authorities="com.jackson.fileprovider"
             android:name="android.support.v4.content.FileProvider"

@@ -6,18 +6,15 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.RadioButton;
-import android.widget.Toast;
 
 import com.example.root.projecttest.CommonUtils;
 import com.example.root.projecttest.R;
-import com.example.root.projecttest.widget.OnDoubleClickListener;
 
 /**
  * author:Jiwenjie
@@ -68,7 +65,7 @@ public class DoubleClickActivity extends AppCompatActivity {
                   ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(clickImg, "rotation", 0, 4, -4, 4, -4, 4, 0);
                   clickImg.setPivotX(clickImg.getWidth() / 2);
                   clickImg.setPivotY(clickImg.getHeight());
-                  objectAnimator.setDuration(1500);
+                  objectAnimator.setDuration(1000);
                   objectAnimator.start();
                }
             } else {

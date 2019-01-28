@@ -74,6 +74,7 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
             }
             case R.id.btn10: {
                 startActivity(new Intent(this, CameraActivity.class));
+               break;
             }
         }
     }
