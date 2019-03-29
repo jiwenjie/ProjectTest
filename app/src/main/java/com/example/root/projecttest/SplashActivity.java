@@ -31,6 +31,9 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.btn8).setOnClickListener(this);
         findViewById(R.id.btn9).setOnClickListener(this);
         findViewById(R.id.btn10).setOnClickListener(this);
+        findViewById(R.id.btn11).setOnClickListener(this);
+        findViewById(R.id.btn12).setOnClickListener(this);
+        findViewById(R.id.btn13).setOnClickListener(this);
     }
 
     @Override
@@ -75,6 +78,18 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.btn10: {
                 startActivity(new Intent(this, CameraActivity.class));
                break;
+            }
+            case R.id.btn11: {
+                startActivity(new Intent(this, TestConnectImage.class));
+                break;
+            }
+           case R.id.btn12: {
+              startActivity(new Intent(this, ShareElementActivity.class));
+              break;
+           }
+            case R.id.btn13: {      // echars 图表的基本使用
+                startActivity(new Intent(this, ShareElementActivity.class));
+                break;
             }
         }
     }

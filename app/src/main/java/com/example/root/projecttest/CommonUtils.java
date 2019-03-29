@@ -6,6 +6,8 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
+import java.util.ArrayList;
+
 /**
  * author:Jiwenjie
  * email:278630464@qq.com
@@ -42,5 +44,9 @@ public class CommonUtils {
       targetView.setPivotY(targetView.getHeight());
       shakeAnimator.setDuration(duration);
       shakeAnimator.start();
+   }
+
+   public static void arrayList(String[] tables) {
+      ArrayList[] fields = new ArrayList[tables.length];
    }
 }

@@ -13,12 +13,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
-import com.bumptech.glide.request.target.Target;
+//import com.bumptech.glide.Glide;
+//import com.bumptech.glide.load.engine.DiskCacheStrategy;
+//import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+//import com.bumptech.glide.request.animation.GlideAnimation;
+//import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
+//import com.bumptech.glide.request.target.Target;
 import com.example.root.projecttest.R;
 import com.example.root.projecttest.glide.ProgressInterceptor;
 import com.example.root.projecttest.glide.ProgressListener;
@@ -96,26 +96,26 @@ public class OnePictureProgressActivity extends AppCompatActivity {
 //            progressDialog.setProgress(progress);
             }
         });
-        Glide.with(this)
-                .load(gifUrl)
-                .skipMemoryCache(true)
-                .placeholder(R.drawable.placeholder)
-                .dontTransform()
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
-                .into(new GlideDrawableImageViewTarget(image) {
-                    @Override
-                    public void onLoadStarted(Drawable placeholder) {
-                        super.onLoadStarted(placeholder);
-//                    progressDialog.show();
-                    }
-
-                    @Override
-                    public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
-                        super.onResourceReady(resource, animation);
-//                    progressDialog.dismiss();
-                        ProgressInterceptor.removeListener(gifUrl);
-                    }
-                });
+//        Glide.with(this)
+//                .load(gifUrl)
+//                .skipMemoryCache(true)
+//                .placeholder(R.drawable.placeholder)
+//                .dontTransform()
+//                .diskCacheStrategy(DiskCacheStrategy.NONE)
+//                .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
+//                .into(new GlideDrawableImageViewTarget(image) {
+//                    @Override
+//                    public void onLoadStarted(Drawable placeholder) {
+//                        super.onLoadStarted(placeholder);
+////                    progressDialog.show();
+//                    }
+//
+//                    @Override
+//                    public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
+//                        super.onResourceReady(resource, animation);
+////                    progressDialog.dismiss();
+//                        ProgressInterceptor.removeListener(gifUrl);
+//                    }
+//                });
     }
 }

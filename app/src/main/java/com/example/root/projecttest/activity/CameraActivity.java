@@ -1,6 +1,9 @@
 package com.example.root.projecttest.activity;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -8,8 +11,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.FileProvider;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
@@ -24,7 +30,7 @@ import java.io.File;
  * desc:
  * version:1.0
  */
-public class CameraActivity extends AppCompatActivity {
+public class CameraActivity extends BaseActivity {
 
    private static final int CROP_REQQUEST = 2;
    private static final int IMAGE_CAMERA = 3;
@@ -45,7 +51,15 @@ public class CameraActivity extends AppCompatActivity {
       findViewById(R.id.cameraBtn).setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View v) {
-            getImageFromCamera();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+               if (reqPermissions(new String[]{
+                       Manifest.permission.CAMERA,
+                       Manifest.permission.READ_EXTERNAL_STORAGE}, 2)) {
+                  getImageFromCamera();
+               }
+            } else {
+               getImageFromCamera();
+            }
          }
       });
 
@@ -55,6 +69,28 @@ public class CameraActivity extends AppCompatActivity {
             getImageFromAlbum();
          }
       });
+   }
+
+   @Override
+   public void reqPermissionResult(boolean isAllGranted, @NonNull String[] permissions, int reqCode) {
+      super.reqPermissionResult(isAllGranted, permissions, reqCode);
+      if (isAllGranted) {
+         getImageFromCamera();
+      } else {
+         new AlertDialog.Builder(this)
+                 .setTitle("提示")
+                 .setMessage("当前操作所需权限已被禁止。\n\n请点击\"设置\"-\"权限\"-打开所需权限。")
+                 .setNegativeButton("取消", null)
+                 .setPositiveButton("设置", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                       Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                       intent.setData(Uri.parse("package:$packageName"));
+                       startActivity(intent);
+                    }
+                 })
+                 .show();
+      }
    }
 
    private void getImageFromCamera() {
@@ -112,6 +148,17 @@ public class CameraActivity extends AppCompatActivity {
       return outputUri;
    }
 
+    public static Bitmap getBitmapFromUri(Context mContext, Uri uri) {
+        try {
+            Bitmap bitmap = MediaStore.Images.Media.
+                    getBitmap(mContext.getContentResolver(), uri);
+            return bitmap;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
    @Override
    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
       super.onActivityResult(requestCode, resultCode, data);
@@ -122,6 +169,9 @@ public class CameraActivity extends AppCompatActivity {
             startImageCrop(uri, 200, 200, CROP_REQQUEST);
          } else if (requestCode == IMAGE_CAMERA) {
             Uri uri;
+
+            Bitmap bitmap = data.getParcelableExtra("data");
+
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                uri = FileProvider.getUriForFile(getBaseContext(), "com.jackson.fileprovider", new File(cameraPath));
             } else {
