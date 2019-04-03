@@ -57,6 +57,8 @@
 
         <activity android:name=".activity.EChartsActivity" />
 
+        <activity android:name=".activity.PassActivity" />
+
         <provider
             android:authorities="com.jackson.fileprovider"
             android:name="android.support.v4.content.FileProvider"

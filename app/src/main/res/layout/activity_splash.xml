@@ -117,6 +117,11 @@
             android:layout_height="wrap_content"
             android:text="图表的基本使用" />
 
+        <Button
+            android:id="@+id/btn14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="自定义密码输入框" />
     </LinearLayout>
 
 
