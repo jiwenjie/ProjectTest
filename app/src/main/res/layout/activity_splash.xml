@@ -122,6 +122,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="自定义密码输入框" />
+
+        <Button
+            android:id="@+id/btn15"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="测试计时器" />
+
+        <Button
+            android:id="@+id/btn16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="测试SnapHelper的使用" />
+
+        <Button
+            android:id="@+id/btn17"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="DialogFragment的使用" />
     </LinearLayout>
 
 

@@ -59,6 +59,12 @@
 
         <activity android:name=".activity.PassActivity" />
 
+        <activity android:name=".activity.TestChronometer" />
+
+        <activity android:name=".activity.SnapHelperActivity" />
+
+        <activity android:name=".activity.DialogFragmentActivity" />
+
         <provider
             android:authorities="com.jackson.fileprovider"
             android:name="android.support.v4.content.FileProvider"

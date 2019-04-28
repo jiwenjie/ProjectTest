@@ -35,6 +35,9 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
       findViewById(R.id.btn12).setOnClickListener(this);
       findViewById(R.id.btn13).setOnClickListener(this);
       findViewById(R.id.btn14).setOnClickListener(this);
+      findViewById(R.id.btn15).setOnClickListener(this);
+      findViewById(R.id.btn16).setOnClickListener(this);
+      findViewById(R.id.btn17).setOnClickListener(this);
    }
 
    @Override
@@ -94,6 +97,18 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
          }
          case R.id.btn14: {      // echars 图表的基本使用
             startActivity(new Intent(this, PassActivity.class));
+            break;
+         }
+         case R.id.btn15: {      // echars 图表的基本使用
+            startActivity(new Intent(this, TestChronometer.class));
+            break;
+         }
+         case R.id.btn16: {      // echars 图表的基本使用
+            startActivity(new Intent(this, SnapHelperActivity.class));
+            break;
+         }
+         case R.id.btn17: {      // echars 图表的基本使用
+            startActivity(new Intent(this, DialogFragmentActivity.class));
             break;
          }
       }
